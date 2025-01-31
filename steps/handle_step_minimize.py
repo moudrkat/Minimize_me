@@ -1,11 +1,11 @@
+import core
+import streamlit as st
 
 def handle_step_minimize():
     try:
         def func_py(x, y):
             return eval(st.session_state.equation)
-        
         #TODO animated plot 
-        
         optimizers_dict = {
             "SGD": "SGD",
             "Adam": "Adam",
@@ -13,7 +13,6 @@ def handle_step_minimize():
             "RMSprop": "RMSprop"
             }
  
-    
         def run_all_optimizers(optimizers,function, x_init, y_init, lr, max_iters):
             # Store the loss history for each optimizer
             optimizer_results = {}
@@ -26,12 +25,12 @@ def handle_step_minimize():
             
             return optimizer_results
             
-        optimizer_results_for_plot = run_all_optimizers(optimizers_dict, st.session_state.func, float(st.session_state.x_init), float(st.session_state.y_init), lr=0.01, max_iters = 100)  
+        optimizer_results_for_plot = run_all_optimizers(optimizers_dict,st.session_state.func,float(st.session_state.x_init), float(st.session_state.y_init),lr=0.01,max_iters = 100)  
     except Exception as e: 
         st.error(f"An error occurred in optimizer run: {e}") 
      
     try:        
-        figure = core.plot_path_history(st.session_state.func, optimizer_results_for_plot, st.session_state.equation) 
+        figure = core.plot_path_history(st.session_state.func, optimizer_results_for_plot, st.session_state.equation, st.session_state.min_x, st.session_state.min_y, st.session_state.max_x, st.session_state.max_y) 
         # Display the plot in Streamlit
         st.pyplot(figure)
     except Exception as e: 

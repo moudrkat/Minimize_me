@@ -1,6 +1,7 @@
+import core
+import streamlit as st
 
-
-def handle_step_plain_function():
+def handle_step_plain_function(functions,set_step):
         # Dropdown for predefined functions
     selected_function_name = st.selectbox("Choose a function:", list(functions.keys()))
     
