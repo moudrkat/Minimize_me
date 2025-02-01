@@ -1,7 +1,7 @@
 import core
 import streamlit as st
 def handle_step_start_point(set_step):
-    st.write("Great choice! The optimization will start at the red point.")
+    st.write("Here I am, ready to begin! I've set a starting point for the optimization process. This is where the search for my minimum begins.")
 
     try:
          st.session_state.func, st.session_state.grad_func_x, st.session_state.grad_func_y = core.get_function_and_gradients(st.session_state.equation )         
@@ -26,10 +26,11 @@ def handle_step_start_point(set_step):
 
     expl = st.toggle("Further explanation")
     if expl: 
-        st.write("Optimizers need start point.")     
+        st.write("Imagine you're standing on a hill — the optimizer starts from this point and works its way down to find the lowest point. This starting point is just a 'first guess.' From here, the optimizer will adjust the values to move closer to my minimum. ")     
                 
-    on = st.toggle("Start point adjustment")
-    if on:       
+    on = st.toggle("Advanced options")
+    if on:    
+        st.write("Select better starting point:")   
         st.session_state.x_init=st.slider('X:',min_value = st.session_state.min_x,max_value = st.session_state.max_x, value = st.session_state.max_x)
         st.session_state.y_init=st.slider('Y:',min_value = st.session_state.min_y,max_value = st.session_state.max_y, value = st.session_state.max_y)
     else:
@@ -42,6 +43,6 @@ def handle_step_start_point(set_step):
     except Exception as e:
             st.error(f"An error occurred in plotting: {e}")
                 
-    if st.button("Next step"):
+    if st.button("Proceed to optimizer selection"):
         set_step(st, 3)
                     

@@ -12,7 +12,7 @@ def handle_step_minimize():
             #selected optimizers musi obsahvat optimizer solution a optimizer name
             # Loop through each optimizer and run the optimization
             for optimizer_name, optimizer_solution in selected_optimizers.items():
-                print(f"Running {optimizer_name} optimizer...")
+                #print(f"Running {optimizer_name} optimizer...")
                 loss_history = core.run_optimizer(optimizer_solution, func_py, x_init, y_init, lr, max_iters)
                 optimizer_results[optimizer_name]  = loss_history
             

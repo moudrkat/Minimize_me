@@ -5,6 +5,8 @@ import json
 from config import settings
 
 def handle_step_optimizers_params(set_step):
+
+    st.write("Time to let the optimizers race to find the minimum! Each optimizer has its own strategy for adjusting parameters and finding the best solution, and it's interesting to see how they perform.")
     
     try:
         figure_func_start = core.plot_function_with_start_point(st.session_state.func,st.session_state.equation,st.session_state.x_init,st.session_state.y_init, st.session_state.min_x, st.session_state.min_y, st.session_state.max_x, st.session_state.max_y )
@@ -49,9 +51,9 @@ def handle_step_optimizers_params(set_step):
     if expl: 
         st.write("Explaining optimizers briefly")   
 
-        equa = st.toggle("Show brutal equations")
-        if equa: 
-            st.write("Showing brutal equations")
+        # equa = st.toggle("Show brutal equations")
+        # if equa: 
+        #     st.write("Showing brutal equations")
 
     # Expert mode toggle
     on = st.toggle("Expert options")
@@ -60,8 +62,62 @@ def handle_step_optimizers_params(set_step):
     st.session_state.max_iters = 1000
     if on:
         st.write("Hyperparameter tuning activated!")
-        st.session_state.learning_rate = st.slider("Learning Rate", min_value=1e-5, max_value=1e-1, value=1e-3, step=1e-5)
-        st.session_state.max_iters = st.slider("Max Iterations", min_value=100, max_value=10000, value=1000, step=100)
+        pos_learning_rates = [0.0001,0.001,0.01]
+        st.session_state.learning_rate = st.select_slider("Learning Rate", options = pos_learning_rates, value=0.001)
+        pos_max_iters = [100,1000,10000]
+        st.session_state.max_iters = st.select_slider("Max Iterations", options = pos_max_iters, value=1000)
+
+        eq = st.toggle("Equations reminder")
+        if eq:
+            st.write("Warning! Calculus approaching.")
+            showeq = st.checkbox("I always enjoy seeing partial derivatives.")
+            if showeq:
+                st.write("""
+                ### Optimization Algorithm Update Rules
+                Below are the update rules for some popular optimization algorithms:
+                """)
+
+                # 1. **SGD**
+                st.write("1. **Stochastic Gradient Descent (SGD)**:")
+                st.latex(r"""
+                $ \mathbf{w}_{\text{new}} = \mathbf{w} - \eta \nabla f(\mathbf{w}) $
+                """)
+
+                # 2. **Adam**
+                st.write("2. **Adam (Adaptive Moment Estimation)**:")
+                st.latex(r"""
+                m_t = \beta_1 m_{t-1} + (1 - \beta_1) \nabla f(\mathbf{w})
+                """)
+                st.latex(r"""
+                v_t = \beta_2 v_{t-1} + (1 - \beta_2) \nabla f(\mathbf{w})^2
+                """)
+                st.latex(r"""
+                \hat{m}_t = \frac{m_t}{1 - \beta_1^t}, \quad \hat{v}_t = \frac{v_t}{1 - \beta_2^t}
+                """)
+                st.latex(r"""
+                \mathbf{w}_{\text{new}} = \mathbf{w} - \eta \cdot \frac{\hat{m}_t}{\sqrt{\hat{v}_t} + \epsilon}
+                """)
+
+                # 3. **Adagrad**
+                st.write("3. **Adagrad**:")
+                st.latex(r"""
+                \mathbf{w}_{\text{new}} = \mathbf{w} - \frac{\eta}{\sqrt{G_t} + \epsilon} \nabla f(\mathbf{w})
+                """)
+
+                # 4. **RMSprop**
+                st.write("4. **RMSprop**:")
+                st.latex(r"""
+                \mathbf{w}_{\text{new}} = \mathbf{w} - \frac{\eta}{\sqrt{v_t + \epsilon}} \nabla f(\mathbf{w})
+                """)
+
+                # Last part - variables explanation, now inside `st.latex()`
+                st.latex(r"""
+                \text{Where:}
+                - \mathbf{w} = [x, y]
+                - \nabla f(\mathbf{w}) = \left( \frac{\partial f}{\partial x}, \frac{\partial f}{\partial y} \right)
+                - \eta \text{ is the learning rate, and } \epsilon \text{ is a small constant to avoid division by zero.}
+                """)
+                
 
     st.session_state.optimizers_dict = configure_optimizers(optimizers_sel, st.session_state.learning_rate)
                         

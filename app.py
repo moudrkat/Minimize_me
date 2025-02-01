@@ -4,7 +4,6 @@ Created on Mon Jan 27 11:08:03 2025
 
 @author: fajma
 """
-
 #import sys
 #sys.path.append('C:\Users\fajma\Documents\Katerina_Fajmanova_Projects\Optimizer_Race')
 
