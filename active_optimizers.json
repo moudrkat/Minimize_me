@@ -1,0 +1,6 @@
+{
+    "SGD": true,
+    "Adam": true,
+    "Adagrad": true,
+    "RMSprop": true
+}

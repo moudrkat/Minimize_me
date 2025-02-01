@@ -1,5 +1,6 @@
 import core
 import streamlit as st
+#from config import settings
 
 def handle_step_plain_function(functions,set_step):
     st.write("Hello, I am your function f(x,y). You can give me description and then minimize me using tesorflow optimizers.")

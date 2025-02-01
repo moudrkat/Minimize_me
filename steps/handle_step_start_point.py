@@ -2,9 +2,6 @@ import core
 import streamlit as st
 def handle_step_start_point(set_step):
     st.write("Great choice! The optimization will start at the red point.")
-    expl = st.toggle("Further explanation")
-    if expl: 
-         st.write("Optimizers need start point.")     
 
     try:
          st.session_state.func, st.session_state.grad_func_x, st.session_state.grad_func_y = core.get_function_and_gradients(st.session_state.equation )         
@@ -26,6 +23,10 @@ def handle_step_start_point(set_step):
             #st.pyplot(figure_func_adjust)    
     except Exception as e:
                 st.error(f"An error occurred in plotting: {e}")
+
+    expl = st.toggle("Further explanation")
+    if expl: 
+        st.write("Optimizers need start point.")     
                 
     on = st.toggle("Start point adjustment")
     if on:       

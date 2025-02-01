@@ -5,13 +5,6 @@ def handle_step_minimize():
     try:
         def func_py(x, y):
             return eval(st.session_state.equation)
-        #TODO animated plot 
-        # optimizers_dict = {
-        #     "SGD": "SGD",
-        #     "Adam": "Adam",
-        #     "Adagrad": "Adagrad",
-        #     "RMSprop": "RMSprop"
-        #     }
  
         def run_all_optimizers(selected_optimizers,function, x_init, y_init, lr, max_iters):
             # Store the loss history for each optimizer
