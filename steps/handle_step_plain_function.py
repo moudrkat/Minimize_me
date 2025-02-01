@@ -2,13 +2,20 @@ import core
 import streamlit as st
 
 def handle_step_plain_function(functions,set_step):
-        # Dropdown for predefined functions
+    st.write("Hello, I am your function f(x,y). You can give me description and then minimize me using tesorflow optimizers.")
+    on = st.toggle("Further explanation")
+    if on:
+        st.write("Minimizing function means thia and tensorflow optimizers mean that")
+        
+    # Dropdown for predefined functions
     selected_function_name = st.selectbox("Choose a function:", list(functions.keys()))
     
     # Custom function input
-    if selected_function_name == "Custom Function (beta version)":
+    if selected_function_name == "... or be creative":
         st.write("Enter a custom function in terms of x and y (e.g., x ** 2 + y ** 2 - x*y):")
-        st.session_state.equation = st.text_area("Custom Function (beta version)", value="2*x**2 + 2*y**2")
+        st.session_state.equation = st.text_area("Create your own function", value="2*x**2 + 2*y**2")
+
+        #TODO add diferentiability and spelling control
     
     else:
         # Select predefined function

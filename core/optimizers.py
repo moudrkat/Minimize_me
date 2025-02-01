@@ -4,28 +4,15 @@ Created on Mon Jan 27 11:16:11 2025
 
 @author: fajma
 """
-
+import streamlit as st
 import numpy as np # linear algebra
 import tensorflow as tf
 
-
-def run_optimizer(optimizer_name:str,func, x_init, y_init, lr=0.001, max_iters=1000):
+def run_optimizer(optimizer,func, x_init, y_init, lr=0.001, max_iters=1000):
     x = tf.Variable(tf.constant(x_init))  # Starting value for x
     y = tf.Variable(tf.constant(y_init))  # Starting value for y
     
     path = [(x.numpy(), y.numpy(), func(x, y).numpy())]
-
-    # Set up the Gradient Descent optimizer with a learning rate
-    if optimizer_name =="SGD":
-         optimizer = tf.optimizers.SGD(learning_rate=lr)  # Sochastic gradient descent optimizer
-    elif optimizer_name == "Adam":
-        optimizer = tf.optimizers.Adam(learning_rate=lr)  # Adam optimizer
-    elif optimizer_name == "Adagrad":
-        optimizer = tf.optimizers.Adagrad(learning_rate=lr)  # Adam optimizer
-    elif optimizer_name == "RMSprop":
-        optimizer = tf.optimizers.RMSprop(learning_rate=lr)  # Adam optimizer
-    else:
-        raise ValueError("Wrong optimizer name")
 
     # Perform optimization (minimizing the function f(x, y))
     for step in range(max_iters):
@@ -47,11 +34,6 @@ def run_optimizer(optimizer_name:str,func, x_init, y_init, lr=0.001, max_iters=1
         path.append((x.numpy(), y.numpy(), loss.numpy()))
         
     return path
-
-
-        # Run Nelder-Mead
-        #result_nm = minimize(lambda xy: func(xy[0], xy[1]), x0=[x_init, y_init], method='Nelder-Mead')
-        #path_nm = [(result_nm.x[0], result_nm.x[1], func(result_nm.x[0], result_nm.x[1]))]
         
 # def gradient_descent(func, grad_func_x, grad_func_y, x_init, y_init, lr=0.001, max_iters=1000):
 #     x, y = x_init, y_init

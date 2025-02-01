@@ -116,8 +116,6 @@ def plot_function_with_start_point(func_to_optimize, equation,x_init,y_init, min
 
 def plot_path_history(func_to_optimize, optimizer_results, equation, min_x, min_y, max_x, max_y):
 
-    #path_optimizer = np.array(path_optimizer)
-
     # Generate data for the plot
     x_vals = np.linspace(min_x, max_x, 1000)
     y_vals = np.linspace(min_y, max_y, 1000)

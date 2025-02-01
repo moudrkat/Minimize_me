@@ -16,12 +16,12 @@ import steps
 
 # Function dictionary
 functions = {
-    "Sphere: x**2 + y**2": "x**2 + y**2",
+    #"Sphere: x**2 + y**2": "x**2 + y**2",
     "Rosenbrock: (1 - x)**2 + 100 * (y - x**2)**2": "(1 - x)**2 + 100 * (y - x**2)**2",
     "Himmelblau: (x**2 + y - 11)**2 + (x + y**2 - 7)**2": "(x**2 + y - 11)**2 + (x + y**2 - 7)**2",
     "Three-hump camel: 2*x**2 - 1.05*x**4 + x**6/6 + x*y + y**2":"2*x**2 - 1.05*x**4 + x**6/6 + x*y + y**2",
     "Matyas: 0.26*(x**2 + y**2) - 0.48*x*y" : "0.26*(x**2 + y**2) - 0.48*x*y",
-    "Custom Function (beta version)": None,
+    "... or be creative": None,
 }
 
 def set_step(st, new_step: int) -> None:
@@ -31,6 +31,7 @@ def set_step(st, new_step: int) -> None:
 #streamlit app
 import streamlit as st
 st.title("Minimize me:red[.]")
+
 
 # Initialize session state to track button clicks
 if 'step' not in st.session_state:
