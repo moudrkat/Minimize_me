@@ -16,13 +16,16 @@ def handle_step_plain_function(functions,set_step):
     if selected_function_name == "... or be creative":
         st.session_state.equation = st.text_area("Enter a custom formula in terms of x and y (e.g., x ** 2 + y ** 2 - x*y):", value="2*x**2 + 2*y**2")
         x, y = sp.symbols('x y')
-        core.validate_function_for_optimization(sp.sympify(st.session_state.equation), [x, y])
+        if st.button("Check function"):
+            validation = core.validate_function_for_optimization(sp.sympify(st.session_state.equation), [x, y])
+            if validation == True:
+                if st.button("Next step"):
+                    set_step(st, 2)
     
     else:
         # Select predefined function
         st.session_state.equation = functions[selected_function_name]
-        
-    if st.button("Next step"):
-        set_step(st, 2)
+        if st.button("Next step"):
+            set_step(st, 2)
 
 
