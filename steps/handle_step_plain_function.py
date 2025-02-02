@@ -1,5 +1,6 @@
 import core
 import streamlit as st
+import sympy as sp
 #from config import settings
 
 def handle_step_plain_function(functions,set_step):
@@ -14,8 +15,8 @@ def handle_step_plain_function(functions,set_step):
     # Custom function input
     if selected_function_name == "... or be creative":
         st.session_state.equation = st.text_area("Enter a custom formula in terms of x and y (e.g., x ** 2 + y ** 2 - x*y):", value="2*x**2 + 2*y**2")
-
-        #TODO add diferentiability and spelling control
+        x, y = sp.symbols('x y')
+        core.validate_function_for_optimization(sp.sympify(st.session_state.equation), [x, y])
     
     else:
         # Select predefined function

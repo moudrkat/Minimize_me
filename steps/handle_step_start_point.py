@@ -30,12 +30,14 @@ def handle_step_start_point(set_step):
                 
     on = st.toggle("Advanced options")
     if on:    
-        st.write("Select better starting point:")   
+        st.write("Now you can select better starting point, if you want:")   
         st.session_state.x_init=st.slider('X:',min_value = st.session_state.min_x,max_value = st.session_state.max_x, value = st.session_state.max_x)
         st.session_state.y_init=st.slider('Y:',min_value = st.session_state.min_y,max_value = st.session_state.max_y, value = st.session_state.max_y)
     else:
         st.session_state.x_init= st.session_state.max_x
         st.session_state.y_init= st.session_state.max_y
+
+    #todo add ranges adjustment but limit to (-5,5)
     try:
         with plot_container:
             figure_func_adjust = core.plot_function_with_start_point(st.session_state.func,st.session_state.equation,st.session_state.x_init,st.session_state.y_init, st.session_state.min_x, st.session_state.min_y, st.session_state.max_x, st.session_state.max_y  )

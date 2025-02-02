@@ -8,6 +8,7 @@ Created on Mon Jan 27 11:08:07 2025
 from .optimizers import run_optimizer
 
 from .functions import get_function_and_gradients
+from .functions import validate_function_for_optimization
 
 from .plotting import basinhopping_find_all_minima
 
