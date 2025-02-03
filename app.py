@@ -22,11 +22,9 @@ def set_step(st, new_step: int) -> None:
 import streamlit as st
 st.title("Minimize me:red[.]")
 
-# Initialize session state to track button clicks
 if 'step' not in st.session_state:
     st.session_state.step = 1
 
-# Display content based on the step
 if st.session_state.step == 1:
     steps.handle_step_plain_function(settings.functions, settings.ranges, settings.global_minima, settings.local_minima, set_step)
     
@@ -36,7 +34,5 @@ elif st.session_state.step == 2:
 elif st.session_state.step == 3:
     steps.handle_step_optimizers_params(settings.optimizer_descriptions, set_step)     
 
-elif st.session_state.step == 4: 
-    steps.handle_step_minimize()    
 
 

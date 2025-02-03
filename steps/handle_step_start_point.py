@@ -18,9 +18,6 @@ def handle_step_start_point(set_step):
         #all_local_minima, minimum, funcmin = core.basinhopping_find_all_minima(func_py)
         plot_container=st.container()
 
-        # with plot_container:
-        #     figure_func_adjust, st.session_state.min_x, st.session_state.min_y, st.session_state.max_x, st.session_state.max_y = core.plot_function_adjust(st.session_state.func,st.session_state.equation )
-        #     #st.pyplot(figure_func_adjust)   
         st.session_state.min_x, st.session_state.max_x = st.session_state.default_min_x_max_x
         st.session_state.min_y, st.session_state.max_y = st.session_state.default_min_y_max_y
 
@@ -54,6 +51,6 @@ def handle_step_start_point(set_step):
     except Exception as e:
             st.error(f"An error occurred in plotting: {e}")
                 
-    if st.button("Proceed to optimizer selection"):
+    if st.button("Minimize me."):
         set_step(st, 3)
                     

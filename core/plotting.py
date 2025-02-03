@@ -45,49 +45,6 @@ def basinhopping_find_all_minima(func):
     
     return local_minima, global_minimum, result
 
-def plot_function_adjust(f, equation):
-    # Define default range for x and y
-    default_range = (-5, 5)
-    
-    # Sample the function over a broad grid
-    x = np.linspace(default_range[0], default_range[1], 1000)  # 1000 points
-    y = np.linspace(default_range[0], default_range[1], 1000)  # 1000 points
-    X, Y = np.meshgrid(x, y)
-    
-    # Evaluate the function on the grid
-    Z = f(X, Y)
-    
-    # Get the min and max of the function's output
-    min_z = np.min(Z)
-    max_z = np.max(Z)
-    
-    # Padding calculation (10% padding around min/max)
-    padding = 0.1 * (max_z - min_z)
-    
-    # Create the plot
-    fig = plt.figure(figsize=(12, 8))
-    ax = fig.add_subplot(111, projection='3d')
-    
-    # Plot the surface
-    ax.plot_surface(X, Y, Z, cmap='viridis', alpha=0.5)
-    contour = ax.contour(X, Y, Z, 30, cmap = 'coolwarm', offset = np.min(Z)-0.5)
-
-    ax.scatter(np.max(X),np.max(Y),f(np.max(X),np.max(Y)),color='r',s=30)
-    
-    # Set the z-limits with padding
-    ax.set_zlim(min_z - padding, max_z + padding)
-    
-    # Optionally set x and y limits
-    ax.set_xlim([np.min(X), np.max(X)])
-    ax.set_ylim([np.min(Y), np.max(Y)])
-
-        # Labels
-    ax.set_title(f"{equation}")
-    ax.set_xlabel("X")
-    ax.set_ylabel("Y")
-    ax.set_zlabel("f(X, Y)")
-    ax.legend()
-    return fig, np.min(X), np.min(Y), np.max(X), np.max(Y)
 
 def plot_function_with_start_point(func_to_optimize, equation, x_init, y_init, x_range, y_range, global_minima, local_minima):
     # Unpack the x and y ranges
@@ -123,8 +80,8 @@ def plot_function_with_start_point(func_to_optimize, equation, x_init, y_init, x
     # Set the aspect ratio of the plot
     #ax.set_box_aspect([1, 1, 1])
 
-    ax.set_xlim(min_x, max_x)
-    ax.set_ylim(min_y, max_y)
+    #ax.set_xlim(min_x, max_x)
+    #ax.set_ylim(min_y, max_y)
     # ax.set_zlim(np.min(Z), np.max(Z))
     # Labels
     ax.set_title(f"{equation}")

@@ -82,7 +82,7 @@ optimizer_descriptions = {
         "final_update": r"""
         \mathbf{w}_{\text{new}} = \mathbf{w} - \eta \cdot \frac{\hat{m}_t}{\sqrt{\hat{v}_t} + \epsilon}
         """,
-        "explanation": "Adam combines ideas from both Momentum and RMSprop. It uses exponentially decaying averages of past gradients and squared gradients. \(\beta_1\) and \(\beta_2\) are decay rates for the moment estimates, and \(\epsilon\) is a small constant to prevent division by zero."
+        "explanation": "Adam uses exponentially decaying averages of past gradients and squared gradients. \(\beta_1\) and \(\beta_2\) are decay rates for the moment estimates, and \(\epsilon\) is a small constant to prevent division by zero."
     },
     "Adagrad": {
         "name": "Adagrad",
@@ -109,7 +109,9 @@ OPTIMIZER_SETTINGS = {
         # "clipvalue": 0.5  
     },
     "Adam": {
-         "learning_rate": 0.001
+        "learning_rate": 0.001,
+        "beta_1": 0.9,
+        "beta_2": 0.999,
     },
     "RMSprop": {
          "learning_rate": 0.001

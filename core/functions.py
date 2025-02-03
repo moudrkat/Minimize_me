@@ -79,9 +79,6 @@ def numerical_gradient(f, xi, yi, x, y, epsilon=1e-5):
 
     return grad_x, grad_y
 
-
-
-
 # Function to check for vanishing or exploding gradients
 def check_for_vanishing_exploding_gradients(f, x_vals, y_vals, x, y, gradient_threshold=1e10, vanishing_threshold=1e-5, min_threshold=1e-3):
     for x_val in x_vals:

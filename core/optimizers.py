@@ -35,23 +35,15 @@ def run_optimizer(optimizer,func, x_init, y_init, lr=0.001, max_iters=1000):
         
     return path
         
-# def gradient_descent(func, grad_func_x, grad_func_y, x_init, y_init, lr=0.001, max_iters=1000):
-#     x, y = x_init, y_init
-#     path = [(x, y, func(x, y))]
+def run_all_optimizers(selected_optimizers,function, x_init, y_init, lr, max_iters):
+    def func_py(x, y):
+        return eval(function)
+    # Store the loss history for each optimizer
+    optimizer_results = {}
+    # Loop through each optimizer and run the optimization
+    for optimizer_name, optimizer_solution in selected_optimizers.items():
+        #print(f"Running {optimizer_name} optimizer...")
+        loss_history = run_optimizer(optimizer_solution, func_py, x_init, y_init, lr, max_iters)
+        optimizer_results[optimizer_name]  = loss_history
     
-#     for _ in range(max_iters):
-#         grad_x = grad_func_x(x, y)
-#         grad_y = grad_func_y(x, y)
-        
-#         # Update using gradients
-#         x -= lr * grad_x
-#         y -= lr * grad_y
-        
-#         # Track progress
-#         path.append((x, y, func(x, y)))
-        
-#         # Convergence check (optional)
-#         #if np.sqrt(grad_x**2 + grad_y**2) < 1e-4:
-#         #    break
-            
-#     return path
+    return optimizer_results
