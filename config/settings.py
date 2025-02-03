@@ -54,17 +54,68 @@ local_minima = {
     "Six-hump camel: (4 - 2.1*x**2 + x**4 / 3) * x**2 + x*y + (-4 + 4*y**2) * y**2": [((0.5, 0.5), -0.836), ((-0.5, 0.5), -0.5)]
 }
 
-OPTIMIZER_SETTINGS = {
+optimizer_descriptions = {
     "SGD": {
-        "learning_rate": 0.001,  # Default learning rate
+        "name": "Stochastic Gradient Descent (SGD)",
+        "formula": r"""
+        \mathbf{w}_{\text{new}} = \mathbf{w} - \eta \nabla f(\mathbf{w})
+        """,
+        "momentum_formula": r"""
+        v_t = \beta v_{t-1} + \nabla f(\mathbf{w})
+        """,
+        "update_with_momentum": r"""
+        \mathbf{w}_{\text{new}} = \mathbf{w} - \eta v_t
+        """,
+        "explanation": "Stochastic Gradient Descent (SGD) is a simple optimization algorithm that updates parameters using the gradient of the loss function. Adding momentum helps accelerate SGD in the relevant direction and dampens oscillations. \(\beta\) is the momentum factor, which controls how much of the previous gradient is retained."
     },
     "Adam": {
-        "learning_rate": 0.001,
+        "name": "Adam (Adaptive Moment Estimation)",
+        "formula": r"""
+        m_t = \beta_1 m_{t-1} + (1 - \beta_1) \nabla f(\mathbf{w})
+        """,
+        "additional_formula": r"""
+        v_t = \beta_2 v_{t-1} + (1 - \beta_2) \nabla f(\mathbf{w})^2
+        """,
+        "corrected_moment": r"""
+        \hat{m}_t = \frac{m_t}{1 - \beta_1^t}, \quad \hat{v}_t = \frac{v_t}{1 - \beta_2^t}
+        """,
+        "final_update": r"""
+        \mathbf{w}_{\text{new}} = \mathbf{w} - \eta \cdot \frac{\hat{m}_t}{\sqrt{\hat{v}_t} + \epsilon}
+        """,
+        "explanation": "Adam combines ideas from both Momentum and RMSprop. It uses exponentially decaying averages of past gradients and squared gradients. \(\beta_1\) and \(\beta_2\) are decay rates for the moment estimates, and \(\epsilon\) is a small constant to prevent division by zero."
     },
     "Adagrad": {
-        "learning_rate": 0.001,
+        "name": "Adagrad",
+        "formula": r"""
+        \mathbf{w}_{\text{new}} = \mathbf{w} - \frac{\eta}{\sqrt{G_t} + \epsilon} \nabla f(\mathbf{w})
+        """,
+        "explanation": "Adagrad adjusts the learning rate for each parameter based on the sum of the squared gradients. It is especially useful for sparse data or features."
     },
     "RMSprop": {
-        "learning_rate": 0.001,
+        "name": "RMSprop",
+        "formula": r"""
+        \mathbf{w}_{\text{new}} = \mathbf{w} - \frac{\eta}{\sqrt{v_t + \epsilon}} \nabla f(\mathbf{w})
+        """,
+        "explanation": "RMSprop modifies Adagrad by introducing a moving average of squared gradients, helping to avoid the rapid decrease in the learning rate. It works well for non-stationary objectives."
+    }
+}
+
+OPTIMIZER_SETTINGS = {
+    "SGD": {
+         "learning_rate": 0.01,
+         "momentum": 0.0,
+        # "nesterov": True,
+        # "weight_decay": 0.0001,  
+        # "clipvalue": 0.5  
+    },
+    "Adam": {
+         "learning_rate": 0.001
+    },
+    "RMSprop": {
+         "learning_rate": 0.001
+
+    },
+    "Adagrad": {
+         "learning_rate": 0.01
     }
 }

@@ -34,7 +34,7 @@ elif st.session_state.step == 2:
    steps.handle_step_start_point(set_step)
     
 elif st.session_state.step == 3:
-    steps.handle_step_optimizers_params(set_step)     
+    steps.handle_step_optimizers_params(settings.optimizer_descriptions, set_step)     
 
 elif st.session_state.step == 4: 
     steps.handle_step_minimize()    
