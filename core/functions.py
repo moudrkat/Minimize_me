@@ -13,17 +13,19 @@ import streamlit as st
 x, y = symbols('x y')
 
 def get_function_and_gradients(func_expression):
-        
+    
+    func_expression = sp.sympify(func_expression)
+
      # Symbolic gradients
-     grad_x = diff(func_expression, x)
-     grad_y = diff(func_expression, y)
+    grad_x = diff(func_expression, x)
+    grad_y = diff(func_expression, y)
     
      # Lambdify to create Python functions
-     func = lambdify((x, y), func_expression, 'numpy')
-     grad_func_x = lambdify((x, y), grad_x, 'numpy')
-     grad_func_y = lambdify((x, y), grad_y, 'numpy')
+    func = lambdify((x, y), func_expression, 'numpy')
+    grad_func_x = lambdify((x, y), grad_x, 'numpy')
+    grad_func_y = lambdify((x, y), grad_y, 'numpy')
     
-     return func, grad_func_x, grad_func_y
+    return func, grad_func_x, grad_func_y
 
 # Function to check if the symbolic derivatives exist for all variables
 def check_symbolic_differentiability(f, variables):
@@ -129,8 +131,8 @@ def validate_function_for_optimization(f, variables):
         return False
     
     # 2. Check if the function and its gradients are numerically stable
-    x_vals = np.linspace(-5, 5, 5)  # 5 points between -10 and 10 for x
-    y_vals = np.linspace(-5, 5, 5)  # 5 points between -10 and 10 for y
+    x_vals = np.linspace(-5, 5, 50)  # 5 points between -10 and 10 for x
+    y_vals = np.linspace(-5, 5, 50)  # 5 points between -10 and 10 for y
     stable, error_message = check_for_numerical_instability(f, x_vals, y_vals)
     if not stable:
         st.write(f"Numerical instability detected: {error_message}")

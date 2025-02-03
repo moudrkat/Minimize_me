@@ -28,7 +28,7 @@ if 'step' not in st.session_state:
 
 # Display content based on the step
 if st.session_state.step == 1:
-    steps.handle_step_plain_function(settings.functions,set_step)
+    steps.handle_step_plain_function(settings.functions, settings.ranges, settings.global_minima, settings.local_minima, set_step)
     
 elif st.session_state.step == 2:
    steps.handle_step_start_point(set_step)

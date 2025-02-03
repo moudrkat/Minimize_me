@@ -23,7 +23,7 @@ def handle_step_minimize():
         st.error(f"An error occurred in optimizer run: {e}") 
      
     try:        
-        figure = core.plot_path_history(st.session_state.func, optimizer_results_for_plot, st.session_state.equation, st.session_state.min_x, st.session_state.min_y, st.session_state.max_x, st.session_state.max_y) 
+        figure = core.plot_path_history(st.session_state.func, optimizer_results_for_plot, st.session_state.equation, st.session_state.final_min_x_max_x, st.session_state.final_min_y_max_y) 
         # Display the plot in Streamlit
         st.pyplot(figure)
     except Exception as e: 

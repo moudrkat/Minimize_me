@@ -9,7 +9,7 @@ def handle_step_optimizers_params(set_step):
     st.write("Time to let the optimizers race to find the minimum! Each optimizer has its own strategy for adjusting parameters and finding the best solution, and it's interesting to see how they perform.")
     
     try:
-        figure_func_start = core.plot_function_with_start_point(st.session_state.func,st.session_state.equation,st.session_state.x_init,st.session_state.y_init, st.session_state.min_x, st.session_state.min_y, st.session_state.max_x, st.session_state.max_y )
+        figure_func_start = core.plot_function_with_start_point(st.session_state.func,st.session_state.equation,st.session_state.x_init,st.session_state.y_init, st.session_state.final_min_x_max_x, st.session_state.final_min_y_max_y, st.session_state.global_minima_f,st.session_state.local_minima_f)  
         st.pyplot(figure_func_start)      
     except Exception as e:
                 st.error(f"An error occurred in plotting: {e}")

@@ -89,45 +89,71 @@ def plot_function_adjust(f, equation):
     ax.legend()
     return fig, np.min(X), np.min(Y), np.max(X), np.max(Y)
 
-def plot_function_with_start_point(func_to_optimize, equation,x_init,y_init, min_x, min_y, max_x, max_y):
+def plot_function_with_start_point(func_to_optimize, equation, x_init, y_init, x_range, y_range, global_minima, local_minima):
+    # Unpack the x and y ranges
+    min_x, max_x = x_range
+    min_y, max_y = y_range
 
     # Generate data for the plot
     x_vals = np.linspace(min_x, max_x, 1000)
     y_vals = np.linspace(min_y, max_y, 1000)
     X, Y = np.meshgrid(x_vals, y_vals)
-    Z=func_to_optimize(X,Y)
+    Z = func_to_optimize(X, Y)
 
-    fig= plt.figure(figsize=(12, 8))
+    fig = plt.figure(figsize=(12, 8))
+
     ax = fig.add_subplot(111, projection='3d')
-    ax.plot_surface(X, Y, Z, cmap='viridis', alpha=0.6)
-    
-    ax.scatter(x_init,y_init,func_to_optimize(x_init,y_init),color='r',s=30)
-    
-    contour = ax.contour(X, Y, Z, 20, cmap = 'coolwarm', offset = np.min(Z)-0.5)
 
+    ax.plot_surface(X, Y, Z, cmap='viridis', alpha=0.6)
+
+    # Plot the initial starting point
+    ax.scatter(x_init, y_init, func_to_optimize(x_init, y_init), color='r', s=30)
+
+    # for (min_x, min_y), _ in global_minima:
+    #     min_val = func_to_optimize(min_x, min_y)  # Evaluate function at the minima
+    #     ax.scatter(min_x, min_y, 0, color='r', s=30, label='Global Minima')
+
+    # for (min_x, min_y), _ in local_minima:
+    #     min_val = func_to_optimize(min_x, min_y)  # Evaluate function at the minima
+    #     ax.scatter(min_x, min_y, 0, color='b', s=30, label='Local Minima')
+
+    # Contour plot
+    contour = ax.contour(X, Y, Z, 20, cmap='coolwarm', offset=np.min(Z)-0.5)
+
+    # Set the aspect ratio of the plot
+    #ax.set_box_aspect([1, 1, 1])
+
+    ax.set_xlim(min_x, max_x)
+    ax.set_ylim(min_y, max_y)
+    # ax.set_zlim(np.min(Z), np.max(Z))
     # Labels
     ax.set_title(f"{equation}")
     ax.set_xlabel("X")
     ax.set_ylabel("Y")
     ax.set_zlabel("f(X, Y)")
     ax.legend()
-    
+
     return fig
 
-def plot_path_history(func_to_optimize, optimizer_results, equation, min_x, min_y, max_x, max_y):
+def plot_path_history(func_to_optimize, optimizer_results, equation, x_range, y_range):
+    # Unpack the x and y ranges
+    min_x, max_x = x_range
+    min_y, max_y = y_range
 
     # Generate data for the plot
     x_vals = np.linspace(min_x, max_x, 1000)
     y_vals = np.linspace(min_y, max_y, 1000)
     X, Y = np.meshgrid(x_vals, y_vals)
-    Z=func_to_optimize(X,Y)
+    Z = func_to_optimize(X, Y)
 
-    fig= plt.figure(figsize=(12, 8))
+    fig = plt.figure(figsize=(12, 8))
     ax = fig.add_subplot(111, projection='3d')
     ax.plot_surface(X, Y, Z, cmap='viridis', alpha=0.6)
-    
-    contour = ax.contour(X, Y, Z, 20, cmap = 'coolwarm', offset = np.min(Z)-0.5)
-    
+
+    # Contour plot
+    contour = ax.contour(X, Y, Z, 20, cmap='coolwarm', offset=np.min(Z)-0.5)
+
+    # Plot optimizer paths
     for optimizer_name, loss_history in optimizer_results.items():
         path_optimizer = np.array(loss_history)
         ax.plot(path_optimizer[:, 0], path_optimizer[:, 1], path_optimizer[:, 2], label=optimizer_name, marker='o')
@@ -138,7 +164,7 @@ def plot_path_history(func_to_optimize, optimizer_results, equation, min_x, min_
     ax.set_ylabel("Y")
     ax.set_zlabel("f(X, Y)")
     ax.legend()
-    
+
     return fig
 
 
