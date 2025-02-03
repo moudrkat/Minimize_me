@@ -61,7 +61,7 @@ def plot_function_with_start_point(func_to_optimize, equation, x_init, y_init, x
 
     ax = fig.add_subplot(111, projection='3d')
 
-    ax.plot_surface(X, Y, Z, cmap='viridis', alpha=0.6)
+    ax.plot_surface(X, Y, Z, cmap='Spectral', alpha=0.6)
 
     # Plot the initial starting point
     ax.scatter(x_init, y_init, func_to_optimize(x_init, y_init), color='r', s=30)

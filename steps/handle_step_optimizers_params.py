@@ -5,11 +5,11 @@ import json
 from config import settings
 
 def handle_step_optimizers_params(optimizer_descriptions, set_step):
-    st.write("Time to let the optimizers race to find the minimum! Each optimizer has its own strategy for adjusting parameters and finding the best solution, and it's interesting to see how they perform.")
+    st.write("SGD proceeded to find the minimum. Now its your turn! Tune hyperparameters to get better results. Or have fun fooling SGD.")
     
     plot_container2=st.container()     
                 
-    st.write("Select TensorFlow Optimizers")
+   #st.write("Select TensorFlow Optimizers")
 
     # Function to load the active optimizers (enabled/disabled) from the JSON file
     def load_active_optimizers(file_path="active_optimizers.json"):
@@ -40,67 +40,59 @@ def handle_step_optimizers_params(optimizer_descriptions, set_step):
     # Load the active optimizers from the JSON file
     active_optimizers = load_active_optimizers()
 
-    expl = st.toggle("Further explanation")  
     optimizers_sel = {}
     for optimizer_name, is_active in active_optimizers.items():
         if is_active:
-            optimizers_sel[optimizer_name] = st.checkbox(optimizer_name)
-            if optimizers_sel[optimizer_name] and expl:
-                # Get the optimizer description from the dictionary
-                optimizer_info = optimizer_descriptions.get(optimizer_name)
+            optimizers_sel[optimizer_name] = st.toggle(f"Apply {optimizer_name}")
+            # Get the optimizer description from the dictionary
+            st.session_state.max_iters = 1000
+            optimizer_params = {}
 
-                if optimizer_info:
-                    st.write(f"**{optimizer_info['name']}**:")
-                    st.latex(optimizer_info["formula"])
+            pos_max_iters = [100, 1000, 10000]
+            st.session_state.max_iters = st.select_slider("Max Iterations (maximum number of optimizer steps)", options=pos_max_iters, value=1000)
 
-                    if optimizer_name == "SGD":
-                        st.latex(optimizer_info["momentum_formula"])
-                        st.latex(optimizer_info["update_with_momentum"])
+            st.session_state.pos_learning_rates = [0.0001, 0.001, 0.01]
 
-                    if optimizer_name == "Adam":
-                        st.latex(optimizer_info["additional_formula"])
-                        st.latex(optimizer_info["corrected_moment"])
-                        st.latex(optimizer_info["final_update"])
+            # Collect custom parameters for each optimizer
+            optimizer_info = optimizer_descriptions.get(optimizer_name)
+            if optimizer_info:
+                st.write(f"**{optimizer_info['name']}**:")
+                st.latex(optimizer_info["formula"])
 
-                    st.write(optimizer_info["explanation"])
-                    st.write("---")
+                if optimizer_name == "SGD":
+                    st.latex(optimizer_info["momentum_formula"])
+                    st.latex(optimizer_info["update_with_momentum"])
+
+                    st.session_state.learning_rate = 0.001
+    
+   
+                optimizer_params[optimizer_name] = {
+                    "learning_rate": st.select_slider("Learning Rate (size of optimizer step)", options=st.session_state.pos_learning_rates, value=0.001),
+                    "momentum": st.slider("Momentum", min_value=0.0, max_value=1.0, value=0.9),
+                    # "nesterov": st.checkbox("Use Nesterov", value=True),
+                    # "weight_decay": st.number_input("Weight Decay", min_value=0.0, max_value=0.01, value=0.0001),
+                    # "clipvalue": st.number_input("Clip Value", min_value=0.0, max_value=10.0, value=0.5)
+                }
+
+                if optimizer_name == "Adam":
+                    st.latex(optimizer_info["additional_formula"])
+                    st.latex(optimizer_info["corrected_moment"])
+                    st.latex(optimizer_info["final_update"])
+
+                st.write(optimizer_info["explanation"])
+                st.write("---")
 
     # If you want to reconfigure optimizers based on selected checkboxes, update active_optimizers:
     for optimizer_name, is_selected in optimizers_sel.items():
         active_optimizers[optimizer_name] = is_selected
 
-    # Expert mode toggle
-    on = st.toggle("Advanced settings")
-    # Show learning rate and max iterations fields if expert mode is enabled
-    st.session_state.learning_rate = 0.001
-    st.session_state.max_iters = 1000
-    optimizer_params = {}
 
-    if on:
-        st.write("Hyperparameter tuning activated!")
-        # # Allow user to select max iterations
-        pos_max_iters = [100, 1000, 10000]
-        st.session_state.max_iters = st.select_slider("Max Iterations (maximum number of optimizer steps)", options=pos_max_iters, value=1000)
 
-        # For each selected optimizer, allow expert mode customization of parameters
-        for optimizer_name in optimizers_sel:
-            if optimizers_sel[optimizer_name]:  # Only show advanced settings if optimizer is selected
-                st.subheader(f"{optimizer_name} Hyperparameters")
-                st.session_state.pos_learning_rates = [0.0001, 0.001, 0.01]
-                # Collect custom parameters for each optimizer
-                if optimizer_name == "SGD":
-                    optimizer_params[optimizer_name] = {
-                        "learning_rate": st.select_slider("Learning Rate (size of optimizer step)", options=st.session_state.pos_learning_rates, value=0.001),
-                        "momentum": st.slider("Momentum", min_value=0.0, max_value=1.0, value=0.9),
-                        # "nesterov": st.checkbox("Use Nesterov", value=True),
-                        # "weight_decay": st.number_input("Weight Decay", min_value=0.0, max_value=0.01, value=0.0001),
-                        # "clipvalue": st.number_input("Clip Value", min_value=0.0, max_value=10.0, value=0.5)
-                    }
 
-                # elif optimizer_name == "Adam":
-                #     optimizer_params[optimizer_name] = {
-                #         "learning_rate": st.number_input("Adam Learning Rate", min_value=0.0001, max_value=1.0, value=st.session_state.learning_rate),
-                #     }
+    # elif optimizer_name == "Adam":
+    #     optimizer_params[optimizer_name] = {
+    #         "learning_rate": st.number_input("Adam Learning Rate", min_value=0.0001, max_value=1.0, value=st.session_state.learning_rate),
+    #     }
 
     # Call configure_optimizers to get the optimizers with updated parameters
     st.session_state.optimizers_dict = configure_optimizers(optimizers_sel, optimizer_params)
@@ -111,8 +103,6 @@ def handle_step_optimizers_params(optimizer_descriptions, set_step):
         figure = core.plot_path_history(st.session_state.func, optimizer_results_for_plot, st.session_state.equation, st.session_state.final_min_x_max_x, st.session_state.final_min_y_max_y) 
         st.pyplot(figure)
 
-    if st.button("Minimize me."):
-        set_step(st, 4)
 
                 
 
