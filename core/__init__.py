@@ -11,7 +11,7 @@ from .optimizers import run_all_optimizers
 from .functions import get_function_and_gradients
 from .functions import validate_function_for_optimization
 
-from .plotting import plot_function_with_start_point
-from .plotting import plot_path_history
+#from .plotting import plot_function_with_start_point
+#from .plotting import plot_path_history
 
 from .plotting import plot_function_with_start_point_and_history
