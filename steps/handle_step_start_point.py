@@ -10,12 +10,6 @@ def handle_step_start_point(set_step):
                 
     try:
         
-        # def func_py(vars):
-        #     x,y = vars
-        #     return eval(st.session_state.equation )
-        
-        #TODO does not work but not necessary
-        #all_local_minima, minimum, funcmin = core.basinhopping_find_all_minima(func_py)
         plot_container=st.container()
 
         st.session_state.min_x, st.session_state.max_x = st.session_state.default_min_x_max_x
@@ -23,8 +17,7 @@ def handle_step_start_point(set_step):
 
     except Exception as e:
                 st.error(f"An error occurred in plotting: {e}")
-
-                
+    
     # on = st.toggle("Advanced options")
     # if on:    
     st.write("Now you can select better starting point, if you want:")   
@@ -43,7 +36,7 @@ def handle_step_start_point(set_step):
 
     try:
         with plot_container:
-            figure_func_adjust = core.plot_function_with_start_point(st.session_state.func,st.session_state.equation,st.session_state.x_init,st.session_state.y_init, st.session_state.final_min_x_max_x, st.session_state.final_min_y_max_y, st.session_state.global_minima_f,st.session_state.local_minima_f)  
+            figure_func_adjust = core.plot_function_with_start_point_and_history(st.session_state.func,st.session_state.equation,st.session_state.x_init,st.session_state.y_init, st.session_state.final_min_x_max_x, st.session_state.final_min_y_max_y, st.session_state.global_minima_f,st.session_state.local_minima_f)  
             st.pyplot(figure_func_adjust)      
     except Exception as e:
             st.error(f"An error occurred in plotting: {e}")

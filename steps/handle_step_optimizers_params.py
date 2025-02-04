@@ -81,18 +81,15 @@ def handle_step_optimizers_params(optimizer_descriptions, set_step):
 
                 st.write(optimizer_info["explanation"])
                 st.write("---")
+                
+            #     optimizer_params[optimizer_name] = {
+            #         "learning_rate": st.number_input("Adam Learning Rate", min_value=0.0001, max_value=1.0, value=st.session_state.learning_rate),
+            #     }
 
     # If you want to reconfigure optimizers based on selected checkboxes, update active_optimizers:
     for optimizer_name, is_selected in optimizers_sel.items():
         active_optimizers[optimizer_name] = is_selected
 
-
-
-
-    # elif optimizer_name == "Adam":
-    #     optimizer_params[optimizer_name] = {
-    #         "learning_rate": st.number_input("Adam Learning Rate", min_value=0.0001, max_value=1.0, value=st.session_state.learning_rate),
-    #     }
 
     # Call configure_optimizers to get the optimizers with updated parameters
     st.session_state.optimizers_dict = configure_optimizers(optimizers_sel, optimizer_params)
@@ -100,7 +97,8 @@ def handle_step_optimizers_params(optimizer_descriptions, set_step):
     optimizer_results_for_plot = core.run_all_optimizers(st.session_state.optimizers_dict,st.session_state.equation,float(st.session_state.x_init), float(st.session_state.y_init),lr=0.01,max_iters = 100) 
    
     with plot_container2:
-        figure = core.plot_path_history(st.session_state.func, optimizer_results_for_plot, st.session_state.equation, st.session_state.final_min_x_max_x, st.session_state.final_min_y_max_y) 
+        #figure = core.plot_path_history(st.session_state.func, optimizer_results_for_plot, st.session_state.equation, st.session_state.final_min_x_max_x, st.session_state.final_min_y_max_y) 
+        figure = core.plot_function_with_start_point_and_history(st.session_state.func,st.session_state.equation,st.session_state.x_init,st.session_state.y_init, st.session_state.final_min_x_max_x, st.session_state.final_min_y_max_y, st.session_state.global_minima_f,st.session_state.local_minima_f,optimizer_results_for_plot)  
         st.pyplot(figure)
 
 
