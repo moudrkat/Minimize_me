@@ -28,11 +28,13 @@ if 'step' not in st.session_state:
 if st.session_state.step == 1:
     steps.handle_step_plain_function(settings.functions, settings.ranges, settings.global_minima, settings.local_minima, set_step)
     
-elif st.session_state.step == 2:
-   steps.handle_step_start_point(set_step)
+# elif st.session_state.step == 2:
+#    steps.handle_step_start_point(set_step)
     
-elif st.session_state.step == 3:
-    steps.handle_step_optimizers_params(settings.optimizer_descriptions, set_step)     
+# elif st.session_state.step == 3:
+#     steps.handle_step_optimizers_params(settings.optimizer_descriptions, set_step)     
+
+#TODO add export
 
 
 

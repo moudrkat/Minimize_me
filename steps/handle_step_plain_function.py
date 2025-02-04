@@ -1,7 +1,8 @@
 import core
 import streamlit as st
 import sympy as sp
-#from config import settings
+import steps
+from config import settings
 
 def handle_step_plain_function(functions, ranges, global_minima, local_minima, set_step):
     st.write("Hello, I am your function f(x,y). Define my formula, and soon you'll have the chance to minimize me using stochastic gradient descent (SGD) and tune hyperparameters!")
@@ -33,7 +34,11 @@ def handle_step_plain_function(functions, ranges, global_minima, local_minima, s
 
     st.session_state.global_minima_f = global_minima[selected_function_name]
     st.session_state.local_minima_f = local_minima[selected_function_name]
-    if st.button("Plot me."):
-        set_step(st, 2)
+
+    steps.handle_step_start_point(set_step)
+    steps.handle_step_optimizers_params(settings.optimizer_descriptions, set_step)     
+
+    # if st.button("Plot me."):
+    #     set_step(st, 2)
 
 
