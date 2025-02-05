@@ -22,7 +22,7 @@ if 'step' not in st.session_state:
     st.session_state.step = 1
 
 if st.session_state.step == 1:
-    steps.handle_step_plain_function(settings.functions, settings.ranges, settings.global_minima, settings.local_minima, set_step)
+    steps.handle_step_minimize(settings.functions, settings.ranges, settings.global_minima, settings.local_minima, set_step)
     
 #elif st.session_state.step == 2:
     #handle step export
