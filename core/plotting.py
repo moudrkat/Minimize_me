@@ -22,7 +22,7 @@ def plot_function_with_start_point_and_history(func_to_optimize, equation, x_ini
     # Plot the surface
     ax.plot_surface(X, Y, Z, cmap='viridis', alpha=0.5)
     # Plot the initial starting point
-    ax.scatter(x_init, y_init, func_to_optimize(x_init, y_init), color='r', s=30)
+    ax.scatter(x_init, y_init, func_to_optimize(x_init, y_init), color='r', s=30,label='Start point')
     # Flags to check if labels have been added
     label_added_global = False
     label_added_local = False
@@ -34,14 +34,16 @@ def plot_function_with_start_point_and_history(func_to_optimize, equation, x_ini
             label_added_global = True
         else:
             ax.scatter(min_x, min_y, min_val, color='r', s=30, marker='x')
-    # Plot local minima
-    for (min_x, min_y), _ in local_minima:
-        min_val = func_to_optimize(min_x, min_y)  # Evaluate function at the minima
-        if not label_added_local:
-            ax.scatter(min_x, min_y, min_val, color='b', s=30, marker='x', label='Local Minimum')
-            label_added_local = True
-        else:
-            ax.scatter(min_x, min_y, min_val, color='b', s=30, marker='x')
+
+    # Plot local minima (commended out because its confusing)
+    # for (min_x, min_y), _ in local_minima:
+    #     min_val = func_to_optimize(min_x, min_y)  # Evaluate function at the minima
+    #     if not label_added_local:
+    #         ax.scatter(min_x, min_y, min_val, color='b', s=30, marker='x', label='Local Minimum')
+    #         label_added_local = True
+    #     else:
+    #         ax.scatter(min_x, min_y, min_val, color='b', s=30, marker='x')
+
     # If optimizer path history is provided, plot it
     if optimizer_results:
         # Contour plot for visual reference
