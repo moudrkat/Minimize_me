@@ -1,13 +1,9 @@
-import core
-import streamlit as st
-import sympy as sp
-import steps
 from config import settings
 import json
 import tensorflow as tf
 
 # Function to load the active optimizers (enabled/disabled) from the JSON file
-def load_active_optimizers(file_path="active_optimizers.json"):
+def load_active_optimizers(file_path="config/active_optimizers.json"):
     with open(file_path, "r") as f:
         return json.load(f)
 

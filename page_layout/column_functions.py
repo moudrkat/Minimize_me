@@ -1,4 +1,4 @@
-import core
+import src
 import streamlit as st
 from config import settings
 
@@ -26,7 +26,7 @@ def prepare_function():
     st.session_state.local_minima_f = settings.local_minima[selected_function_name]
 
     try:
-        st.session_state.func, st.session_state.grad_func_x, st.session_state.grad_func_y = core.get_function_and_gradients(st.session_state.equation )         
+        st.session_state.func, st.session_state.grad_func_x, st.session_state.grad_func_y = src.get_function_and_gradients(st.session_state.equation )         
     except Exception as e: 
             st.error(f"An error occurred in function and gradient creation: {e}")
                     

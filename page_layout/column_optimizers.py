@@ -1,4 +1,4 @@
-import core
+import src
 import streamlit as st
 # from optimizers import OptimizerInterface
 from config import settings
@@ -7,7 +7,7 @@ def prepare_and_run_optimizers():
     st.write("Optimizer settings:")
 
     # Load the active optimizers from the JSON file
-    st.session_state.active_optimizers = core.load_active_optimizers()
+    st.session_state.active_optimizers = src.load_active_optimizers()
 
     pos_max_iters = [100, 1000, 10000]
     st.session_state.max_iters = st.select_slider("Max Iterations", options=pos_max_iters, value=1000)
@@ -50,7 +50,7 @@ def prepare_and_run_optimizers():
                     }
 
     # Call configure_optimizers to get the optimizers with updated parameters
-    st.session_state.optimizers_dict = core.configure_optimizers(optimizers_sel, optimizer_params)
+    st.session_state.optimizers_dict = src.configure_optimizers(optimizers_sel, optimizer_params)
     print( st.session_state.optimizers_dict)
 
-    st.session_state.optimizer_results_for_plot = core.run_all_optimizers(st.session_state.optimizers_dict,st.session_state.equation,float(st.session_state.x_init), float(st.session_state.y_init),max_iters = st.session_state.max_iters) 
+    st.session_state.optimizer_results_for_plot = src.run_all_optimizers(st.session_state.optimizers_dict,st.session_state.equation,float(st.session_state.x_init), float(st.session_state.y_init),max_iters = st.session_state.max_iters) 

@@ -4,8 +4,6 @@ Created on Mon Jan 27 11:08:05 2025
 
 @author: fajma
 """
-
-#TODO add Zakharov function
 functions = {
     "Himmelblau: (x**2 + y - 11)**2 + (x + y**2 - 7)**2": "(x**2 + y - 11)**2 + (x + y**2 - 7)**2",
     "Rosenbrock: (1 - x)**2 + 100 * (y - x**2)**2": "(1 - x)**2 + 100 * (y - x**2)**2",
