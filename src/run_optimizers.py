@@ -34,6 +34,11 @@ def run_all_optimizers(selected_optimizers,function, x_init, y_init, max_iters):
     # Loop through each optimizer and run the optimization
     for optimizer_name, optimizer_solution in selected_optimizers.items():
         print(f"Running {optimizer_name} optimizer...")
-        loss_history = run_optimizer(optimizer_solution, func_py, x_init, y_init, max_iters)
+        
+        try:
+            loss_history = run_optimizer(optimizer_solution, func_py, x_init, y_init, max_iters)
+        except Exception as e:
+            print(f"An error occurred while running the optimizer: {e}")
+
         optimizer_results[optimizer_name]  = loss_history
     return optimizer_results

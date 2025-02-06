@@ -19,9 +19,9 @@ def prepare_function():
     # else: #predefined functions dropdown here
 
     st.session_state.equation = settings.functions[selected_function_name]
+
     st.session_state.default_min_x_max_x = settings.ranges[selected_function_name][:2] 
     st.session_state.default_min_y_max_y = settings.ranges[selected_function_name][2:] 
-
     st.session_state.global_minima_f = settings.global_minima[selected_function_name]
     st.session_state.local_minima_f = settings.local_minima[selected_function_name]
 
@@ -36,9 +36,12 @@ def prepare_function():
     st.session_state.min_y, st.session_state.max_y = st.session_state.default_min_y_max_y
 
     with st.expander("Adjust start point"):
-        #st.write("Now you can select better starting point, if you want:")   
-        st.session_state.x_init=st.slider('X:',min_value = st.session_state.min_x,max_value = st.session_state.max_x, value = st.session_state.max_x)
-        st.session_state.y_init=st.slider('Y:',min_value = st.session_state.min_y,max_value = st.session_state.max_y, value = st.session_state.max_y)
+
+        col1,col2 =st.columns(2)
+        with col1:
+            st.session_state.x_init=st.slider('X:',min_value = float(st.session_state.min_x),max_value = float(st.session_state.max_x), value = ((st.session_state.max_x)/2),step=0.5)
+        with col2:
+            st.session_state.y_init=st.slider('Y:',min_value = float(st.session_state.min_y),max_value = float(st.session_state.max_y), value = float(st.session_state.max_y),step=0.5)
         
         # st.write("And you can also adjust axes ranges to zoom me:")
         # st.session_state.final_min_x_max_x=st.slider('X range:',min_value = st.session_state.min_x,max_value = st.session_state.max_x, value = (st.session_state.min_x,st.session_state.max_x))

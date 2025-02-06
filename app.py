@@ -15,7 +15,7 @@ import streamlit as st
 st.title("Minimize me:red[.]")
 st.write("Hello, I am your function f(x,y). Define my formula, and minimize me using Tensorflow optimizers!")
 
-col1, col2 = st.columns([1.3,1])
+col1, spc, col2 = st.columns([1.3,0.06, 0.9])
 with col1:
     page_layout.prepare_function()
 
@@ -27,7 +27,7 @@ with st.session_state.plot_container:
     st.pyplot(figure)
 
 with st.expander("$^*$Show Cheatsheet"):
-    page_layout.show_optimizer_update_rules()
+    page_layout.show_cheatsheet()
 
 
 

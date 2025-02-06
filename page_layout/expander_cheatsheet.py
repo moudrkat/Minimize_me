@@ -1,7 +1,7 @@
 import streamlit as st 
 from config import settings
 
-def show_optimizer_update_rules():
+def show_cheatsheet():
 
     for optimizer_name, is_active in st.session_state.active_optimizers.items():
         if not is_active:
@@ -10,7 +10,8 @@ def show_optimizer_update_rules():
         if not optimizer_info:
             continue
 
-        st.write(f"**{optimizer_info['name']}**:") 
+        st.write("") 
+        st.write(f"**{optimizer_info['name']} update rules**:") 
         # Display the explanation text
         #st.write(optimizer_info["explanation"])  # Displays the explanation text
         # Display "Update Rule" header

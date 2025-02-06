@@ -71,11 +71,14 @@ optimizer_descriptions = {
         v_t = \beta v_{t-1} + (1 - \beta) \nabla f(\mathbf{w})
         """,
         "where": """
-        - $v_t$: The momentum (velocity) term at time step $t$.
-        - $\beta$: The momentum coefficient, usually between 0.8 and 0.99, controlling how much of the previous gradient is remembered.
-        - $v_{t-1}$: The velocity from the previous time step.
-        - $\nabla$ $f(\mathbf{w})$: The current gradient of the loss function with respect to the model parameters.
-        - $\eta$: The learning rate, which controls the size of each step.
+        - $\mathbf{w}_{\\text{new}}$ is the updated weight vector.
+        - $\mathbf{w}$ is the current weight vector.
+        - $\\eta$ is the learning rate.
+        - $v_t$ is the momentum (velocity) term at time step $t$.
+        - $\\beta$ is the momentum coefficient.
+        - $v_{t-1}$ is the velocity from the previous time step.
+        - $\\nabla$ $f(\mathbf{w})$ is the current gradient of the loss function with respect to the model parameters.
+        
         """
     },
     "Adam": {
@@ -92,12 +95,15 @@ optimizer_descriptions = {
         \quad v_t = \beta_2 v_{t-1} + (1 - \beta_2) \nabla f(\mathbf{w})^2
         """,
         "where": """
-        - $m_t$: The first moment (mean of the gradients).
-        - $v_t$: The second moment (variance of the gradients).
-        - $\beta_1, \beta_2$: Exponential decay rates for the moving averages of the first and second moments.
-        - $\hat{m}_t$, $\hat{v}_t$: Bias-corrected first and second moment estimates.
-        - $\eta$: The learning rate.
-        - $\epsilon$: A small constant to prevent division by zero.
+        - $\mathbf{w}_{\\text{new}}$ is the updated weight vector.
+        - $\mathbf{w}$ is the current weight vector
+        - $\\eta$ is the learning rate.
+        - $\hat{m}_t$, $\hat{v}_t$ are bias-corrected first and second moment estimates.
+        - $m_t$ is the first moment (mean of the gradients).
+        - $v_t$ is the second moment (variance of the gradients).
+        - $\\epsilon$ is a small constant to prevent division by zero.
+        - $\\beta_1, \\beta_2$ are exponential decay rates for the moving averages of the first and second moments.
+        - $\\nabla$ $f(\mathbf{w})$ is the current gradient of the loss function with respect to the model parameters.
         """
     },
 
@@ -113,10 +119,14 @@ optimizer_descriptions = {
         v_t = \rho v_{t-1} + (1 - \rho) \nabla f(\mathbf{w})^2
         """,
         "where": """
-        - $v_t$: The running average of the squared gradients.
-        - $\rho$: The decay factor (typically between 0.9 and 0.99).
-        - $\eta$: The learning rate.
-        - $\epsilon$: A small constant to prevent division by zero.
+        - $\mathbf{w}_{\\text{new}}$ is the updated weight vector.
+        - $\mathbf{w}$ is the current weight vector.
+        - $\\eta$ is the learning rate.
+        - $v_t$ is the running average of the squared gradients.
+        - $\\epsilon$ is a small constant to prevent division by zero.
+        - $\\nabla$ $f(\mathbf{w})$ is the current gradient of the loss function with respect to the model parameters.
+        - $\\rho$ is the decay factor.
+
         """
     },
         "Adagrad": {
@@ -130,9 +140,9 @@ optimizer_descriptions = {
         """,
         "where": """
         - $\mathbf{w}_t$: The parameter vector at step \(t\).
-        - $\eta$: The learning rate.
+        - $\\eta$: The learning rate.
         - $G_t$: The sum of squared gradients up to time step \(t\).
-        - $\epsilon$: A small constant to prevent division by zero.
+        - $\\epsilon$: A small constant to prevent division by zero.
         """
     }
 }
