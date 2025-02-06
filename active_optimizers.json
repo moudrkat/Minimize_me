@@ -1,6 +1,6 @@
 {
     "SGD": true,
+    "RMSprop": true,
     "Adam": true,
-    "Adagrad": false,
-    "RMSprop": false
+    "Adagrad": false
 }
