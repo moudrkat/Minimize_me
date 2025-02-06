@@ -8,7 +8,7 @@ Created on Mon Jan 27 11:16:33 2025
 import numpy as np # linear algebra
 import matplotlib.pyplot as plt
 
-def plot_function_with_start_point_and_history(func_to_optimize, equation, x_init, y_init, x_range, y_range, global_minima, local_minima, optimizer_results=None):
+def plot_function_with_start_point_and_history(func_to_optimize, equation, x_init, y_init, x_range, y_range, global_minima, azimuth, optimizer_results=None):
     # Unpack the x and y ranges
     min_x, max_x = x_range
     min_y, max_y = y_range
@@ -22,7 +22,7 @@ def plot_function_with_start_point_and_history(func_to_optimize, equation, x_ini
     # Plot the surface
     ax.plot_surface(X, Y, Z, cmap='viridis', alpha=0.55)
 
-    ax.view_init(azim =-45, elev=40)
+    ax.view_init(azim=azimuth, elev=40)
     # Plot the initial starting point
     ax.scatter(x_init, y_init, func_to_optimize(x_init, y_init), color='r', s=50,label='Start point')
     # Contour plot for visual reference

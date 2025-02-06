@@ -35,6 +35,9 @@ def prepare_function():
     st.session_state.min_x, st.session_state.max_x = st.session_state.default_min_x_max_x
     st.session_state.min_y, st.session_state.max_y = st.session_state.default_min_y_max_y
 
+    with st.expander("Rotate the plot"):
+        st.session_state.set_azim=st.slider('Azimuth:',min_value = -45,max_value = 135, value = -45,step=5)
+
     with st.expander("Adjust start point"):
 
         col1,col2 =st.columns(2)
@@ -42,6 +45,8 @@ def prepare_function():
             st.session_state.x_init=st.slider('X:',min_value = float(st.session_state.min_x),max_value = float(st.session_state.max_x), value = ((st.session_state.max_x)/2),step=0.5)
         with col2:
             st.session_state.y_init=st.slider('Y:',min_value = float(st.session_state.min_y),max_value = float(st.session_state.max_y), value = float(st.session_state.max_y),step=0.5)
+
+
         
         # st.write("And you can also adjust axes ranges to zoom me:")
         # st.session_state.final_min_x_max_x=st.slider('X range:',min_value = st.session_state.min_x,max_value = st.session_state.max_x, value = (st.session_state.min_x,st.session_state.max_x))
