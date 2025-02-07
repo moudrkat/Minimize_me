@@ -51,7 +51,7 @@ How to Use
         Adjust the Start Point: You can specify a starting point for the optimization process. The optimizers will begin their search for the minimum from this point.
         Set Maximum Iterations: Control how many iterations the optimizer will perform. This setting determines how long the optimization will run.
         Run Optimizers: On the right side of the app, you’ll find toggle buttons for each optimizer (e.g., SGD, Adam). Turn on the toggle for the optimizer you want to run
-        Tune Hyperparameters: Under each optimizer’s section, you'll find an expander containing hyperparameters that can be fine-tuned (e.g., learning rate, batch size). Experiment with different values to observe how they affect the optimizer’s behavior.
+        Tune Hyperparameters: Under each optimizer’s section, you'll find an expander containing hyperparameters that can be fine-tuned (e.g., learning rate). Experiment with different values to observe how they affect the optimizer’s behavior.
 
     Footer:
         Refer to the Cheatsheet: If you want to recall the update rules or formulas used by each optimizer, you can access a handy cheatsheet at the bottom expander of the app. This section provides the relevant formulas for each optimization method.
