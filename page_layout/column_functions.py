@@ -42,8 +42,8 @@ def prepare_function():
 
     # possibility to zoom the function is currently commended out because seemed redundant to me
 
-    # st.session_state.min_x, st.session_state.max_x = st.session_state.default_min_x_max_x
-    # st.session_state.min_y, st.session_state.max_y = st.session_state.default_min_y_max_y
+    st.session_state.min_x, st.session_state.max_x = st.session_state.default_min_x_max_x
+    st.session_state.min_y, st.session_state.max_y = st.session_state.default_min_y_max_y
     # st.write("And you can also adjust axes ranges to zoom me:")
     # st.session_state.final_min_x_max_x=st.slider('X range:',min_value = st.session_state.min_x,max_value = st.session_state.max_x, value = (st.session_state.min_x,st.session_state.max_x))
     # st.session_state.final_min_y_max_y=st.slider('Y range:',min_value = st.session_state.min_y,max_value = st.session_state.max_y, value = (st.session_state.min_y,st.session_state.max_y))
