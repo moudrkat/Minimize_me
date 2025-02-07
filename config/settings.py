@@ -41,7 +41,7 @@ GLOBAL_MINIMA = {
     "Six-hump Camel": [((0.0898, -0.7126), -1.0316), ((-0.0898, 0.7126), -1.0316)]
 }
 
-optimizer_descriptions = {
+OPTIMIZER_DESCRIPTIONS = {
     "SGD": {
         "name": "Stochastic Gradient Descent (SGD)",
         "update_rule": r"""

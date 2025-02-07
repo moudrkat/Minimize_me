@@ -4,10 +4,17 @@ import streamlit as st
 from config import settings
 
 def prepare_and_run_optimizers():
-    st.write("Optimizer settings:")
+    st.markdown("##### Optimizer settings:")
     # Load the active optimizers from the JSON file
     st.session_state.active_optimizers = src.load_active_optimizers()
 
+    st.caption("Adjust start point:")
+    col1,col2 =st.columns(2)
+    with col1:
+        st.session_state.x_init=st.slider('X:',min_value = float(st.session_state.min_x),max_value = float(st.session_state.max_x), value = ((st.session_state.max_x)/2),step=0.5)
+    with col2:
+        st.session_state.y_init=st.slider('Y:',min_value = float(st.session_state.min_y),max_value = float(st.session_state.max_y), value = float(st.session_state.max_y),step=0.5)
+    
     pos_max_iters = [100, 1000, 10000]
     st.session_state.max_iters = st.select_slider("Set max. iterations:", options=pos_max_iters, value=1000)
     optimizer_params = {}
@@ -21,7 +28,7 @@ def prepare_and_run_optimizers():
         optimizers_sel[optimizer_name] = st.toggle(f"RUN **{optimizer_name}** OPTIMIZER")
         # Get the optimizer description from the dictionary
         # Collect custom parameters for each optimizer
-        optimizer_info = settings.optimizer_descriptions.get(optimizer_name)
+        optimizer_info = settings.OPTIMIZER_DESCRIPTIONS.get(optimizer_name)
         if not optimizer_info:
             continue
 

@@ -6,16 +6,12 @@ def show_cheatsheet():
     for optimizer_name, is_active in st.session_state.active_optimizers.items():
         if not is_active:
             continue
-        optimizer_info = settings.optimizer_descriptions.get(optimizer_name)
+        optimizer_info = settings.OPTIMIZER_DESCRIPTIONS.get(optimizer_name)
         if not optimizer_info:
             continue
 
         st.write("") 
         st.write(f"**{optimizer_info['name']} update rules**:") 
-        # Display the explanation text
-        #st.write(optimizer_info["explanation"])  # Displays the explanation text
-        # Display "Update Rule" header
-        #st.write("Update Rule:")
         # Display the update rule
         st.latex(optimizer_info["update_rule"])  # Displays the update rule
         # Display the components of the update rule 

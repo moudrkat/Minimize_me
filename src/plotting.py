@@ -7,6 +7,7 @@ Created on Mon Jan 27 11:16:33 2025
 
 import numpy as np # linear algebra
 import matplotlib.pyplot as plt
+import matplotlib.image as mpimg
 
 def plot_function_with_start_point_and_history(func_to_optimize, latex_equation, x_init, y_init, x_range, y_range, global_minima, azimuth, optimizer_results=None):
     # Unpack the x and y ranges
@@ -41,10 +42,22 @@ def plot_function_with_start_point_and_history(func_to_optimize, latex_equation,
     # If optimizer path history is provided, plot it
     if optimizer_results:
 
+        exploding_gradient = False
         # Plot optimizer paths
         for optimizer_name, loss_history in optimizer_results.items():
             path_optimizer = np.array(loss_history)
             ax.plot(path_optimizer[:, 0], path_optimizer[:, 1], path_optimizer[:, 2], label=optimizer_name, marker='o')
+            if np.any(np.isnan(path_optimizer[:, [0, 1, 2]])):
+                exploding_gradient = True
+                # print(path_optimizer[:, 0] )
+                # print(path_optimizer[:, 1] )
+                # print(path_optimizer[:, 2] )
+
+        if exploding_gradient == True:
+            image_path = 'Exploding-Kitten-Nuclear-Bombs.jpg'
+            im = mpimg.imread(image_path)     
+            fig.figimage(im, 50, 50, zorder=3)    
+
     # Labels
     ax.set_title(f"{latex_equation}")
     ax.set_xlabel("X")
