@@ -62,7 +62,7 @@ OPTIMIZER_DESCRIPTIONS = {
     "Adam": {
         "name": "Adam (Adaptive Moment Estimation)",
         "update_rule": r"""
-        \quad \mathbf{w}_{\text{new}} = \mathbf{w} - \eta \cdot \frac{\hat{m}_t}{\sqrt{\hat{v}_t} + \epsilon} \\
+        \quad \mathbf{w}_{\text{new}} = \mathbf{w} -  \frac{\eta }{\sqrt{\hat{v}_t} + \epsilon}\cdot\hat{m}_t \\
         m_t = \beta_1 m_{t-1} + (1 - \beta_1) \nabla f(\mathbf{w})
         \quad v_t = \beta_2 v_{t-1} + (1 - \beta_2) \nabla f(\mathbf{w})^2
         """,
@@ -82,7 +82,7 @@ OPTIMIZER_DESCRIPTIONS = {
     "RMSprop": {
         "name": "RMSprop",
         "update_rule": r"""
-        \quad \mathbf{w}_{\text{new}} = \mathbf{w} - \frac{\eta}{\sqrt{v_t + \epsilon}} \nabla f(\mathbf{w}) \\
+        \quad \mathbf{w}_{\text{new}} = \mathbf{w} - \frac{\eta}{\sqrt{v_t} + \epsilon} \nabla f(\mathbf{w}) \\
         v_t = \rho v_{t-1} + (1 - \rho) \nabla f(\mathbf{w})^2
         """,
         "where": """

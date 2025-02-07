@@ -29,3 +29,5 @@ streamlit_project/
 
 The aim of this app is to give the user opportunity to compare Tensorflow optimizers paths on via visualisation on f(x,y) surface.
 
+There is a future possibility to add column function definition to UI. Thats why i am lambdyfing the string expression to get the function.
+

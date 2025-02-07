@@ -9,7 +9,7 @@ def show_cheatsheet():
         optimizer_info = settings.OPTIMIZER_DESCRIPTIONS.get(optimizer_name)
         if not optimizer_info:
             continue
-
+        
         st.write("") 
         st.write(f"**{optimizer_info['name']} update rules**:") 
         # Display the update rule

@@ -51,15 +51,15 @@ def plot_function_with_start_point_and_history(func_to_optimize, latex_equation,
                 exploding_gradient = True
 
         if exploding_gradient == True:
-            image_path = 'Exploding_gradient.jpg'
+            image_path = 'config/Exploding_gradient.jpg'
             im = mpimg.imread(image_path)     
             fig.figimage(im, 300, 100, zorder=3, alpha=0.8)    
 
     # Labels
-    ax.set_title(f"{latex_equation}")
-    ax.set_xlabel("X")
-    ax.set_ylabel("Y")
-    ax.set_zlabel("f(X, Y)")
+    ax.set_title(f"f(x,y)={latex_equation}")
+    ax.set_xlabel("x")
+    ax.set_ylabel("y")
+    ax.set_zlabel("f(x, y)")
     ax.zaxis.labelpad=-0.6
     # Add legend to the plot
     ax.legend()
