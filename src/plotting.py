@@ -8,7 +8,7 @@ Created on Mon Jan 27 11:16:33 2025
 import numpy as np # linear algebra
 import matplotlib.pyplot as plt
 
-def plot_function_with_start_point_and_history(func_to_optimize, equation, x_init, y_init, x_range, y_range, global_minima, azimuth, optimizer_results=None):
+def plot_function_with_start_point_and_history(func_to_optimize, latex_equation, x_init, y_init, x_range, y_range, global_minima, azimuth, optimizer_results=None):
     # Unpack the x and y ranges
     min_x, max_x = x_range
     min_y, max_y = y_range
@@ -46,7 +46,7 @@ def plot_function_with_start_point_and_history(func_to_optimize, equation, x_ini
             path_optimizer = np.array(loss_history)
             ax.plot(path_optimizer[:, 0], path_optimizer[:, 1], path_optimizer[:, 2], label=optimizer_name, marker='o')
     # Labels
-    ax.set_title(f"{equation}")
+    ax.set_title(f"{latex_equation}")
     ax.set_xlabel("X")
     ax.set_ylabel("Y")
     ax.set_zlabel("f(X, Y)")

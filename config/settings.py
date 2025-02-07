@@ -4,68 +4,46 @@ Created on Mon Jan 27 11:08:05 2025
 
 @author: fajma
 """
-functions = {
-    "Himmelblau: (x**2 + y - 11)**2 + (x + y**2 - 7)**2": "(x**2 + y - 11)**2 + (x + y**2 - 7)**2",
-    "Rosenbrock: (1 - x)**2 + 100 * (y - x**2)**2": "(1 - x)**2 + 100 * (y - x**2)**2",
-    #"Beale: (1.5 - x + x * y)**2 + (2.25 - x + x * y**2)**2 + (2.625 - x + x * y**3)**2": "(1.5 - x + x * y)**2 + (2.25 - x + x * y**2)**2 + (2.625 - x + x * y**3)**2",
-    "Matyas: 0.26*(x**2 + y**2) - 0.48*x*y": "0.26*(x**2 + y**2) - 0.48*x*y",
-    #"Ackley: -20 * exp(-0.2 * sqrt(0.5 * (x**2 + y**2))) - exp(0.5 * (cos(2 * pi * x) + cos(2 * pi * y))) + exp(1) + 20": 
-    #    "-20 * exp(-0.2 * sqrt(0.5 * (x**2 + y**2))) - exp(0.5 * (cos(2 * pi * x) + cos(2 * pi * y))) + exp(1) + 20",
-    #"Rastrigin: 20 + x**2 + y**2 - 10 * (cos(2 * pi * x) + cos(2 * pi * y))": 
-    #    "20 + x**2 + y**2 - 10 * (cos(2 * pi * x) + cos(2 * pi * y))",
-    "Three-hump camel: 2*x**2 - 1.05*x**4 + x**6/6 + x*y + y**2": "2*x**2 - 1.05*x**4 + x**6/6 + x*y + y**2",
-    "Six-hump camel: (4 - 2.1*x**2 + x**4 / 3) * x**2 + x*y + (-4 + 4*y**2) * y**2": 
-         "(4 - 2.1*x**2 + x**4 / 3) * x**2 + x*y + (-4 + 4*y**2) * y**2"
-    #"... or be creative": None
+
+# Function formulas (Python)
+FORMULAS = {
+    "Himmelblau": "(x**2 + y - 11)**2 + (x + y**2 - 7)**2",
+    "Rosenbrock": "(1 - x)**2 + 100 * (y - x**2)**2",
+    "Matyas": "0.26*(x**2 + y**2) - 0.48*x*y",
+    "Three-hump Camel": "2*x**2 - 1.05*x**4 + x**6/6 + x*y + y**2",
+    "Six-hump Camel": "(4 - 2.1*x**2 + x**4 / 3) * x**2 + x*y + (-4 + 4*y**2) * y**2"
 }
 
-ranges = {
-    "Himmelblau: (x**2 + y - 11)**2 + (x + y**2 - 7)**2": (-5, 5, -5, 5),
-    "Rosenbrock: (1 - x)**2 + 100 * (y - x**2)**2": (-2, 2, -1, 3),
-    "Beale: (1.5 - x + x * y)**2 + (2.25 - x + x * y**2)**2 + (2.625 - x + x * y**3)**2": (-4, 4, -4, 4),
-    "Matyas: 0.26*(x**2 + y**2) - 0.48*x*y": (-10, 10, -10, 10),
-    "Ackley: -20 * exp(-0.2 * sqrt(0.5 * (x**2 + y**2))) - exp(0.5 * (cos(2 * pi * x) + cos(2 * pi * y))) + exp(1) + 20": (-2, 2, -2, 2),
-    "Rastrigin: 20 + x**2 + y**2 - 10 * (cos(2 * pi * x) + cos(2 * pi * y))": (-5.12, 5.12, -5.12, 5.12),
-    "Three-hump camel: 2*x**2 - 1.05*x**4 + x**6/6 + x*y + y**2": (-2, 2, -1.5, 1.5),
-    "Six-hump camel: (4 - 2.1*x**2 + x**4 / 3) * x**2 + x*y + (-4 + 4*y**2) * y**2": (-2, 2, -1, 1)
+# LaTeX formatted formulas
+LATEX_FORMULAS = {
+    "Himmelblau": r"$(x^2 + y - 11)^2 + (x + y^2 - 7)^2$",
+    "Rosenbrock": r"$(1 - x)^2 + 100 \cdot (y - x^2)^2$",
+    "Matyas": r"$0.26(x^2 + y^2) - 0.48xy$",
+    "Three-hump Camel": r"$2x^2 - 1.05x^4 + \frac{x^6}{6} + xy + y^2$",
+    "Six-hump Camel": r"$(4 - 2.1x^2 + \frac{x^4}{3}) x^2 + xy + (-4 + 4y^2) y^2$"
 }
 
-global_minima = {
-    "Himmelblau: (x**2 + y - 11)**2 + (x + y**2 - 7)**2": [((3, 2), 0), ((-2.805, 3.131), 0),((-3.779, -3.283), 0),((3.584, -1.848), 0)],
-    "Rosenbrock: (1 - x)**2 + 100 * (y - x**2)**2": [((1, 1), 0)],
-    "Beale: (1.5 - x + x * y)**2 + (2.25 - x + x * y**2)**2 + (2.625 - x + x * y**3)**2": [((3, 0.5), 0)],
-    "Matyas: 0.26*(x**2 + y**2) - 0.48*x*y": [((0, 0), 0)],
-    "Ackley: -20 * exp(-0.2 * sqrt(0.5 * (x**2 + y**2))) - exp(0.5 * (cos(2 * pi * x) + cos(2 * pi * y))) + exp(1) + 20": [((0, 0), 0)],
-    "Rastrigin: 20 + x**2 + y**2 - 10 * (cos(2 * pi * x) + cos(2 * pi * y))": [((0, 0), 0)],
-    "Three-hump camel: 2*x**2 - 1.05*x**4 + x**6/6 + x*y + y**2": [((0, 0), -1.0316)],
-    "Six-hump camel: (4 - 2.1*x**2 + x**4 / 3) * x**2 + x*y + (-4 + 4*y**2) * y**2": [((0.0898, -0.7126), -1.0316),((-0.0898, 0.7126), -1.0316)]
+# Ranges
+RANGES = {
+    "Himmelblau": (-5, 5, -5, 5),
+    "Rosenbrock": (-2, 2, -1, 3),
+    "Matyas": (-10, 10, -10, 10),
+    "Three-hump Camel": (-2, 2, -1.5, 1.5),
+    "Six-hump Camel": (-2, 2, -1, 1)
 }
 
-local_minima = {
-    "Himmelblau: (x**2 + y - 11)**2 + (x + y**2 - 7)**2": [],
-    "Rosenbrock: (1 - x)**2 + 100 * (y - x**2)**2": [],
-    "Beale: (1.5 - x + x * y)**2 + (2.25 - x + x * y**2)**2 + (2.625 - x + x * y**3)**2": [],
-    "Matyas: 0.26*(x**2 + y**2) - 0.48*x*y": [],
-    "Ackley: -20 * exp(-0.2 * sqrt(0.5 * (x**2 + y**2))) - exp(0.5 * (cos(2 * pi * x) + cos(2 * pi * y))) + exp(1) + 20": [],
-    "Rastrigin: 20 + x**2 + y**2 - 10 * (cos(2 * pi * x) + cos(2 * pi * y))": [],
-    "Three-hump camel: 2*x**2 - 1.05*x**4 + x**6/6 + x*y + y**2": [((-1.914,0.970), -1.031),((1.914,-0.970),-1.031)],
-    "Six-hump camel: (4 - 2.1*x**2 + x**4 / 3) * x**2 + x*y + (-4 + 4*y**2) * y**2": [((-0.089, -0.712), -1.032), ((0.089, 0.712), -1.032),((-1.732, 1.032), -0.803),((1.732, -1.032), -0.803)]
+# Global minima
+GLOBAL_MINIMA = {
+    "Himmelblau": [((3, 2), 0), ((-2.805, 3.131), 0), ((-3.779, -3.283), 0), ((3.584, -1.848), 0)],
+    "Rosenbrock": [((1, 1), 0)],
+    "Matyas": [((0, 0), 0)],
+    "Three-hump Camel": [((0, 0), -1.0316)],
+    "Six-hump Camel": [((0.0898, -0.7126), -1.0316), ((-0.0898, 0.7126), -1.0316)]
 }
 
 optimizer_descriptions = {
     "SGD": {
         "name": "Stochastic Gradient Descent (SGD)",
-        "explanation": """
-        Stochastic Gradient Descent (SGD) is a simple optimization algorithm that updates model parameters 
-        in the direction of the negative gradient of the loss function with respect to those parameters. 
-        When **momentum** is introduced, the optimizer not only considers the current gradient but also includes 
-        the previous updates, effectively "remembering" past gradients to help accelerate convergence and dampen 
-        oscillations.
-        
-        - Momentum helps in accelerating the optimization in directions with consistent gradients.
-        - It also reduces oscillations in directions where gradients are noisy or vary rapidly, such as in ravines 
-          or narrow valleys of the loss surface.
-        """,
         "update_rule": r"""
         \quad \mathbf{w}_{\text{new}} = \mathbf{w} - \eta v_t \\
         v_t = \beta v_{t-1} + (1 - \beta) \nabla f(\mathbf{w})
@@ -83,12 +61,6 @@ optimizer_descriptions = {
     },
     "Adam": {
         "name": "Adam (Adaptive Moment Estimation)",
-        "explanation": """
-        Adam combines the benefits of momentum and RMSprop. It adapts the learning rate for each parameter by tracking 
-        the first moment (mean of the gradients) and the second moment (variance of the gradients).
-        Adam also uses bias correction to avoid initial bias in the moment estimates, making it a robust choice for 
-        training deep neural networks.
-        """,
         "update_rule": r"""
         \quad \mathbf{w}_{\text{new}} = \mathbf{w} - \eta \cdot \frac{\hat{m}_t}{\sqrt{\hat{v}_t} + \epsilon} \\
         m_t = \beta_1 m_{t-1} + (1 - \beta_1) \nabla f(\mathbf{w})
@@ -109,11 +81,6 @@ optimizer_descriptions = {
 
     "RMSprop": {
         "name": "RMSprop",
-        "explanation": """
-        RMSprop modifies Adagrad by using a moving average of squared gradients, which prevents the learning rate from 
-        decreasing too quickly. This makes it more stable for training non-stationary objectives, such as those found 
-        in deep learning tasks with noisy data.
-        """,
         "update_rule": r"""
         \quad \mathbf{w}_{\text{new}} = \mathbf{w} - \frac{\eta}{\sqrt{v_t + \epsilon}} \nabla f(\mathbf{w}) \\
         v_t = \rho v_{t-1} + (1 - \rho) \nabla f(\mathbf{w})^2
@@ -131,10 +98,6 @@ optimizer_descriptions = {
     },
         "Adagrad": {
         "name": "Adagrad",
-        "explanation": """
-        Adagrad adjusts the learning rate based on the sum of the squared gradients. It reduces the learning rate for 
-        parameters with large gradients and increases it for those with small gradients, making it well-suited for sparse data.
-        """,
         "update_rule": r"""
         \mathbf{w}_{\text{new}} = \mathbf{w} - \frac{\eta}{\sqrt{G_t} + \epsilon} \nabla f(\mathbf{w})
         """,
