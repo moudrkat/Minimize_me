@@ -9,6 +9,7 @@ from sympy import symbols, diff, lambdify
 
 x, y = symbols('x y')
 
+# sympify user selected function and create gradients
 def get_function_and_gradients(func_expression):
     func_expression = sp.sympify(func_expression)
     # Symbolic gradients

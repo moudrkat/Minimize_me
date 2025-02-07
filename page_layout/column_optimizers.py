@@ -5,9 +5,9 @@ from config import settings
 
 def prepare_and_run_optimizers():
     st.markdown("##### Optimizer settings:")
-    # Load the active optimizers from the JSON file
-    st.session_state.active_optimizers = src.load_active_optimizers()
 
+
+    #start point adjustment
     st.caption("Adjust start point:")
     col1,col2 =st.columns(2)
     with col1:
@@ -15,16 +15,21 @@ def prepare_and_run_optimizers():
     with col2:
         st.session_state.y_init=st.slider('Y:',min_value = float(st.session_state.min_y),max_value = float(st.session_state.max_y), value = float(st.session_state.max_y),step=0.5)
     
+    #max iterations adjustment
     pos_max_iters = [100, 1000, 10000]
     st.session_state.max_iters = st.select_slider("Set max. iterations:", options=pos_max_iters, value=1000)
     optimizer_params = {}
     optimizers_sel = {}
     st.session_state.pos_learning_rates = [0.0001, 0.001, 0.01]
 
+    # Load the active optimizers from the JSON file - by active i mean the ones depicted on webpage for selection
+    st.session_state.active_optimizers = src.load_active_optimizers()
+
     for optimizer_name, is_active in st.session_state.active_optimizers.items():
         if not is_active:
             continue
         
+        #selection of optimizer to run by the user
         optimizers_sel[optimizer_name] = st.toggle(f"RUN **{optimizer_name}** OPTIMIZER")
         # Get the optimizer description from the dictionary
         # Collect custom parameters for each optimizer

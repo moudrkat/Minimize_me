@@ -41,7 +41,6 @@ def plot_function_with_start_point_and_history(func_to_optimize, latex_equation,
 
     # If optimizer path history is provided, plot it
     if optimizer_results:
-
         exploding_gradient = False
         # Plot optimizer paths
         for optimizer_name, loss_history in optimizer_results.items():
@@ -49,7 +48,7 @@ def plot_function_with_start_point_and_history(func_to_optimize, latex_equation,
             ax.plot(path_optimizer[:, 0], path_optimizer[:, 1], path_optimizer[:, 2], label=optimizer_name, marker='o')
             if np.any(np.isnan(path_optimizer[:, [0, 1, 2]])):
                 exploding_gradient = True
-
+        #inspect for NaN values in the optimizer path due to oddly selected parameters for given function and display warning
         if exploding_gradient == True:
             image_path = 'config/Exploding_gradient.jpg'
             im = mpimg.imread(image_path)     

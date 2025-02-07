@@ -1,29 +1,30 @@
 streamlit_project/
-├── app.py                                  # Main Streamlit app entry point
-├── requirements.txt                        # Dependencies 
-├── .gitignore                              # Excludes unnecessary files 
-├── README.md                               # Documentation
+├── app.py                                    # Main entry point for the Streamlit app
+├── requirements.txt                          # Python dependencies for the app
+├── .gitignore                                # Specifies files to exclude from version control
+├── README.md                                 # Project documentation
 │
-├── config/                                 # Configuration files
-│   ├── _init_.py  
-│   └── settings.py                         # Functions, their minima and ranges for plotting, description of optimizers for cheatsheet, optimizers default parameters
-│   └── active_optimizers.json              # Optimizers used in deployed app (the ones with True value)
-│   └── Exploding_gradient.jpg              # "easter egg" of app
+├── config/                                   # Configuration files for the app
+│   ├── __init__.py                           # Initialization of the configuration module
+│   ├── settings.py                           # Contains function definitions, minima, ranges, and optimizer settings (default parameters, cheatsheet data)
+│   ├── active_optimizers.json                # Stores the active optimizers used in the deployed app (with True/False values)
+│   └── Exploding_gradient.jpg                # "Easter egg" image for the app
 │
-├── src/                                    # Core logic and computation modules
-│   ├── _init_.py       
-│   ├── functions.py                        # Function for custom functions and gradient (for next app version) evaluation. Now the selected function is just sympified here
-│   ├── load_and_configure_optimizers.py    # Functions for configuring optimizers with custom selected hyperparameters
-│   ├── run_optimizers.py                   # Functions for run of Tensorflow optimizers 
-│   └── plotting.py                         # Function for 3D plotting
+├── src/                                      # Core logic and computation modules
+│   ├── __init__.py                           # Initialization of the source module
+│   ├── functions.py                          # Handles function selection, custom function support (for future versions), and gradient evaluation
+│   ├── load_and_configure_optimizers.py      # Configures optimizers with selected hyperparameters
+│   ├── run_optimizers.py                     # Runs TensorFlow optimizers with selected settings
+│   └── plotting.py                           # 3D plotting functions for visualizing optimization paths
 │
-|── page_layout/                            # The logic of web page: all streamlit frontend
-├   ├── _init_.py        
-├   ├── column_functions                    # Part of page with function creation and plot
-├   ├── column_optimizers                   # Part with optimizers run and hyperparameter tuning
-├   ├── expander_cheatsheet                 # Bottom expander with cheatsheet
+├── page_layout/                              # Streamlit frontend logic for page layout and display
+│   ├── __init__.py                           # Initialization of the page layout module
+│   ├── column_functions.py                   # Function selection and plotting display components
+│   ├── column_optimizers.py                  # Optimizer control, execution, and hyperparameter tuning components
+│   ├── expander_cheatsheet.py                # Bottom section containing the optimizer update rules cheatsheet
 │
-├── unused_scripts/                         # Misc untested scripts for the next version of app
+├── unused_scripts/                           # Miscellaneous or experimental scripts for future app versions
+
 
 Welcome to the "Minimize me." app! This interactive tool allows you to observe and explore how TensorFlow optimizers search for the minimum of a mathematical function, such as the Rosenbrock function.
 
