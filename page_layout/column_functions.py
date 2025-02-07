@@ -37,7 +37,7 @@ def prepare_function():
     st.session_state.min_y, st.session_state.max_y = st.session_state.default_min_y_max_y
 
     with st.expander("Rotate the plot"):
-        st.session_state.set_degree=st.slider('Degree:',min_value = 0,max_value = 180, value = 0,step=5)
+        st.session_state.set_degree=st.slider('↻',min_value = 0,max_value = 180, value = 0,step=5)
         st.session_state.set_azim=st.session_state.set_degree - 45
 
     # with st.expander("Adjust start point"):

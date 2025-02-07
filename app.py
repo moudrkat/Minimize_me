@@ -13,7 +13,7 @@ os.environ["KMP_DUPLICATE_LIB_OK"]="TRUE"
 #streamlit app
 import streamlit as st
 st.title("Minimize me:red[.]")
-st.write("Hello, I am your function f(x,y). You can minimize me using Tensorflow optimizers!")
+st.write("Hello, I am your function f(x, y). I invite you to observe TensorFlow optimizers as they search for my minimum. Feel free to tweak the hyperparameters and explore how different settings affect the optimization path. Have fun experimenting!")
 
 col1, spc, col2 = st.columns([1.3,0.06, 0.9])
 with col1:

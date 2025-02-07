@@ -49,14 +49,11 @@ def plot_function_with_start_point_and_history(func_to_optimize, latex_equation,
             ax.plot(path_optimizer[:, 0], path_optimizer[:, 1], path_optimizer[:, 2], label=optimizer_name, marker='o')
             if np.any(np.isnan(path_optimizer[:, [0, 1, 2]])):
                 exploding_gradient = True
-                # print(path_optimizer[:, 0] )
-                # print(path_optimizer[:, 1] )
-                # print(path_optimizer[:, 2] )
 
         if exploding_gradient == True:
-            image_path = 'Exploding-Kitten-Nuclear-Bombs.jpg'
+            image_path = 'Exploding_gradient.jpg'
             im = mpimg.imread(image_path)     
-            fig.figimage(im, 50, 50, zorder=3)    
+            fig.figimage(im, 300, 100, zorder=3, alpha=0.8)    
 
     # Labels
     ax.set_title(f"{latex_equation}")
