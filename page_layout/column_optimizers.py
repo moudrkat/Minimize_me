@@ -17,7 +17,7 @@ def prepare_and_run_optimizers():
     
     #max iterations adjustment
     pos_max_iters = [100, 1000, 10000]
-    st.session_state.max_iters = st.select_slider("Set max. iterations:", options=pos_max_iters, value=1000)
+    st.session_state.max_iters = st.select_slider("Set max. iterations:", options=pos_max_iters, value=100)
     optimizer_params = {}
     optimizers_sel = {}
     st.session_state.pos_learning_rates = [0.0001, 0.001, 0.01]
