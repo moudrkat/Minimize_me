@@ -2,6 +2,10 @@
 
 Welcome to the "Minimize me." app! This interactive tool allows you to observe and explore how TensorFlow optimizers search for the minimum of a mathematical function, such as the Rosenbrock function.
 
+**Try it live:** [minimize-me.streamlit.app](https://minimize-me.streamlit.app)
+
+![the live app: the Himmelblau landscape with SGD, RMSprop and Adam ready to race](media/minimize-me.png)
+
 ![Exploding gradient](config/Exploding_gradient.jpg)
 
 ## Run it locally
